@@ -3,6 +3,9 @@
 
 # ServerlessProject
 
+### Project Architecture
+
+```mermaid
 graph TD
     subgraph Public_Internet [Public Internet]
         User((User Browser))
@@ -36,7 +39,6 @@ graph TD
     Gremlin -- Inject Chaos --> WAF
     CW -- Monitor --> Lambda
     Budgets -- Alert --> User
-
 
 
 Serverless Crypto Sentinel 🛡️💰
