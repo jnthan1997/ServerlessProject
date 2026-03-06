@@ -39,6 +39,7 @@ graph TD
     Gremlin --> WAF
     CW --> Lambda
     Budgets --> User
+```
 
 Serverless Crypto Sentinel 🛡️💰
 
