@@ -1,4 +1,42 @@
+
+
+
 # ServerlessProject
+
+graph TD
+    subgraph Public_Internet [Public Internet]
+        User((User Browser))
+    end
+
+    subgraph AWS_Edge [AWS Edge Locations]
+        WAF[AWS WAF <br/><i>Rate Limiting & Security</i>]
+        CF[CloudFront CDN]
+        S3_Static[(S3 Bucket <br/><i>Static Assets</i>)]
+    end
+
+    subgraph AWS_VPC [AWS VPC - Private Region]
+        Lambda[AWS Lambda <br/><i>Express.js Logic</i>]
+        SM[Secrets Manager]
+        RDS[(RDS MySQL <br/><i>Transactions</i>)]
+    end
+
+    subgraph Monitoring_Chaos [Monitoring & Chaos]
+        Gremlin[Gremlin EC2 Agent]
+        CW[CloudWatch Alarms]
+        Budgets[AWS Budgets/SNS]
+    end
+
+    %% Connections
+    User --> WAF
+    WAF --> CF
+    CF -- GET Assets --> S3_Static
+    CF -- API Requests --> Lambda
+    Lambda -- Fetch Secret --> SM
+    Lambda -- Query --> RDS
+    Gremlin -- Inject Chaos --> WAF
+    CW -- Monitor --> Lambda
+    Budgets -- Alert --> User
+
 
 
 Serverless Crypto Sentinel 🛡️💰
